@@ -1,8 +1,7 @@
 <template>
-  <v-app light>
+  <v-app>
     <v-app-bar
       absolute
-      app
       elevation="4"
       height="90"
       style="position:fixed !important;background-color: white !important;"
@@ -25,7 +24,7 @@
               >
                 <v-img
                   width="200"
-                  src="../../../../assets/near-hispano-logo.png"
+                  src="../assets/near-hispano-logo.png"
                 />
               </router-link>
             </v-toolbar-title>

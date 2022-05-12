@@ -1,6 +1,6 @@
 <template>
-  <div class="container mt-12">
-    <aside class="text-h1 font-weight-bold text-center mt-10">
+  <div class="container">
+    <aside class="text-h2 font-weight-bold text-center mt-8">
       Mis Certificados
     </aside>
     <v-row class="mt-5">
@@ -45,7 +45,7 @@
     </v-row>
     <v-row class="mt-10">
       <v-col class="col-6 offset-3">
-        <aside class="text-h2 font-weight-medium text-center">
+        <aside class="text-h4 font-weight-medium text-center">
           Lorem ipsum dolor sit amet consectetur adipisicing elit.
         </aside>
       </v-col>
@@ -55,14 +55,17 @@
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, deleniti obcaecati sed facilis, iste, ipsa voluptates suscipit ullam dolore quos sunt culpa officia vitae error quo at in eum commodi!
         </p>
-        <v-btn
-          class="ma-2 mt-5"
-          rounded
-          outlined
-          large
-        >
-          Certificate
-        </v-btn>
+        <nuxt-link to="https://educacion.nearhispano.org/">
+          <v-btn
+            class="ma-2 mt-5"
+            rounded
+            outlined
+            large
+          >
+            Certificate
+          </v-btn>
+        </nuxt-link>
+        
       </v-col>
     </v-row>
   </div>
@@ -71,7 +74,6 @@
 <script>
   export default {
     name: 'DashboardDashboard',
-
     data () {
       return {
         itemsCertificados: [
@@ -82,5 +84,10 @@
         ],
       }
     },
+    methods: {
+      verNearHispano () {
+        this.$router.push('https://educacion.nearhispano.org/')
+      }
+    }
   }
 </script>

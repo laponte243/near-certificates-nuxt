@@ -1,22 +1,15 @@
 <template>
-  <v-app light>
-    <v-app-bar
-      absolute
-      app
-      elevation="4"
-      height="90"
-      style="position:fixed !important;background-color: white !important;"
-    >
+  <v-app>
+    <v-app-bar :clipped-left="clipped" fixed app height="90">
       <div class="container">
-        <div class="d-lg-flex justify-content-between">
+        <v-row class="d-lg-flex justify-content-between align-center">
           <v-col
             class="d-none"
-            align-self="center"
           >
             <v-app-bar-nav-icon />
           </v-col>
           <v-col
-            class="col-3 d-flex justify-start mt-8"
+            class="col-3 d-flex justify-start"
           >
             <v-toolbar-title>
               <router-link
@@ -25,7 +18,7 @@
               >
                 <v-img
                   width="200"
-                  src="../../../../assets/near-hispano-logo.png"
+                  :src="require('../assets/img/near-hispano-logo.png')"
                 />
               </router-link>
             </v-toolbar-title>
@@ -38,13 +31,14 @@
               v-model="values"
               :items="items"
               outlined
+              dense
             />
           </v-col>
           <v-col
-            class="col-3 d-flex justify-end mt-3"
+            class="col-3 d-flex justify-end"
           >
             <div
-              class="my-2 text-right"
+              class="text-right"
             >
               <v-btn
                 class="ma-2"
@@ -56,7 +50,7 @@
               </v-btn>
             </div>
           </v-col>
-        </div>
+        </v-row>
       </div>
     </v-app-bar>
     <v-main>
@@ -71,24 +65,14 @@
 </template>
 
 <script>
- // Utilities
-  export default {
-    name: 'DashboardCoreAppBar',
-    data () {
-      return {
-        sesion: false,
-        accountId: '',
-        loading: false,
-        items: [],
-        search: null,
-        select: null,
-        values: null,
-      }
-    },
-  }
+export default {
+  name: 'DefaultLayout',
+  data() {
+    return {
+      clipped: false,
+      fixed: false,
+      miniVariant: true,
+    }
+  },
+}
 </script>
-<style >
-  .container {
-    max-width: 1300px;
-  }
-</style>

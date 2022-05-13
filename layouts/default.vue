@@ -18,7 +18,7 @@
               >
                 <v-img
                   width="200"
-                  :src="require('../assets/near-hispano-logo.png')"
+                  :src="require('../assets/img/near-hispano-logo.png')"
                 />
               </router-link>
             </v-toolbar-title>

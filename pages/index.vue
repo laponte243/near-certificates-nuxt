@@ -55,7 +55,7 @@
         <p>
           Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, deleniti obcaecati sed facilis, iste, ipsa voluptates suscipit ullam dolore quos sunt culpa officia vitae error quo at in eum commodi!
         </p>
-        <nuxt-link to="https://educacion.nearhispano.org/">
+        <a href="https://educacion.nearhispano.org/">
           <v-btn
             class="ma-2 mt-5"
             rounded
@@ -64,7 +64,7 @@
           >
             Certificate
           </v-btn>
-        </nuxt-link>
+        </a>
         
       </v-col>
     </v-row>

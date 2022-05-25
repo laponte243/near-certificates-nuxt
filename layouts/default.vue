@@ -160,32 +160,6 @@ export default {
       localStorage.accountSearch = accountId
       this.$router.go(0)
     }
-    // async viewCertificates (accountId) {
-    //   var keycode = (e.keyCode ? e.keyCode : e.which);
-    //   if (keycode == '13') {
-    //     alert('paso el key')
-    //     const CONTRACT_NAME = "nft.nearcertificate.testnet";
-    //     // connect to NEAR
-    //     const near = await connect(
-    //       CONFIG(new keyStores.BrowserLocalStorageKeyStore())
-    //     );
-    //     // create wallet connection
-    //     const wallet = new WalletConnection(near);
-    //     const contract = new Contract(wallet.account(), CONTRACT_NAME, {
-    //       viewMethods: ["get_certificate_list"],
-    //       sender: wallet.account(),
-    //     });
-    //     await contract.get_certificate_list({
-    //       account_id: accountId,
-    //     }).then((response) => {
-    //       //console.log(response);
-    //       this.dataCertificates = response
-    //       console.log(this.dataCertificates);
-    //     }).catch((err) => {
-    //       console.log(err)
-    //     });
-    //   }
-    // },
   }
 }
 </script>

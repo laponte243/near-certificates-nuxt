@@ -29,6 +29,7 @@
                 download
                 color="orange"
                 text
+                @click="download(item.img, item.certificacion)"
               >
                 Descargar
               </v-btn>
@@ -66,7 +67,6 @@
             Certificate
           </v-btn>
         </a>
-        
       </v-col>
     </v-row>
   </div>
@@ -137,6 +137,24 @@ import * as nearAPI from 'near-api-js'
         }).catch((err) => {
           console.log(err)
         });
+      },
+      download (url, certificacion) {
+        axios({
+          url: url,
+          method: 'GET',
+          responseType: 'blob'
+        }).then(res => {
+          let url = window.URL.createObjectURL(new Blob([res.data]))
+          let link = document.createElement('a')
+          link.style.display = 'none'
+          link.href = url
+          link.setAttribute('download', 'certificado-' + certificacion + '.png')
+          
+          document.body.appendChild(link)
+          link.click()
+        }).catch(error => {
+          console.log(error)
+        })
       }
     }
   }

@@ -65,7 +65,6 @@
             Certificate
           </v-btn>
         </a>
-        
       </v-col>
     </v-row>
   </div>
@@ -157,7 +156,6 @@
         }).catch(error => {
           console.log(error)
         })
-        
       }
     }
   }

@@ -18,6 +18,7 @@
             />
             <v-card-actions>
               <v-btn
+                v-if="item.minteable && !busqueda"
                 color="orange"
                 text
                 @click="mintCertificate(item.id)"
@@ -33,13 +34,6 @@
               >
                 Descargar
               </v-btn>
-              <!-- <a
-                :href="item.img"
-                download
-                class="btn btn-success"
-              >
-                Descargar imagen
-              </a> -->
             </v-card-actions>
           </v-card>
         </viewer>
@@ -48,16 +42,16 @@
     <v-row class="mt-10">
       <v-col class="col-6 offset-3">
         <aside class="text-h4 font-weight-medium text-center">
-          Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Aprende y construye la web 3.0
         </aside>
       </v-col>
     </v-row>
     <v-row>
       <v-col class="col-8 offset-2 text-center">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipisicing elit. Provident, deleniti obcaecati sed facilis, iste, ipsa voluptates suscipit ullam dolore quos sunt culpa officia vitae error quo at in eum commodi!
+          Sabemos que deseas una guía experimentada que te ayude a conocer este nuevo mundo. Hemos creado experiencias de aprendizaje que transforman tu forma de percibir el blockchain, a tu propio ritmo y totalmente en línea.
         </p>
-        <a href="https://educacion.nearhispano.org/">
+        <a href="https://educacion.nearhispano.org/" target="_blank" style="text-decoration: none;">
           <v-btn
             class="ma-2 mt-5"
             rounded
@@ -89,12 +83,15 @@ import axios from 'axios'
           { img: require('../assets/img/certificado.png') },
         ],
         dataCertificates: [],
+        busqueda: false,
       }
     },
     mounted() {
       if (localStorage.accountSearch !== '') {
+        this.busqueda = true
         this.viewCertificates(localStorage.accountSearch)
       } else {
+        this.busqueda = false
         this.viewCertificates(localStorage.accountId)
       }
     },

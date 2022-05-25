@@ -27,11 +27,19 @@
             class="col-6 d-flex justify-center mt-7"
             align-self="center"
           >
-            <v-autocomplete
+            <!-- <v-autocomplete
               v-model="values"
               :items="items"
               outlined
               dense
+            /> -->
+            <v-text-field
+              solo
+              v-model="account"
+              label="Id Near"
+              append-icon="mdi-magnify"
+              @keyup.enter="viewCertificates(account)"
+              clearable
             />
           </v-col>
           <v-col
@@ -103,6 +111,7 @@ export default {
       miniVariant: true,
       sesion: false,
       accountId: null,
+      account: null,
     }
   },
   mounted () {
@@ -145,7 +154,33 @@ export default {
       this.sesion = false
       localStorage.accountId = ''
       this.$router.go()
-    }
+    },
+    async viewCertificates (accountId) {
+      var keycode = (e.keyCode ? e.keyCode : e.which);
+      if (keycode == '13') {
+        alert('paso el key')
+        const CONTRACT_NAME = "nft.nearcertificate.testnet";
+        // connect to NEAR
+        const near = await connect(
+          CONFIG(new keyStores.BrowserLocalStorageKeyStore())
+        );
+        // create wallet connection
+        const wallet = new WalletConnection(near);
+        const contract = new Contract(wallet.account(), CONTRACT_NAME, {
+          viewMethods: ["get_certificate_list"],
+          sender: wallet.account(),
+        });
+        await contract.get_certificate_list({
+          account_id: accountId,
+        }).then((response) => {
+          //console.log(response);
+          this.dataCertificates = response
+          console.log(this.dataCertificates);
+        }).catch((err) => {
+          console.log(err)
+        });
+      }
+    },
   }
 }
 </script>

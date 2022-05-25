@@ -73,7 +73,8 @@
 </template>
 
 <script>
-import * as nearAPI from 'near-api-js'
+import axios from 'axios'
+  import * as nearAPI from 'near-api-js'
   import { CONFIG } from '~/services/api'
   const { connect, keyStores, WalletConnection, Contract } = nearAPI
   const CONTRACT_NAME = "nft.nearcertificate.testnet";
@@ -91,13 +92,18 @@ import * as nearAPI from 'near-api-js'
       }
     },
     mounted() {
-      this.viewCertificates(localStorage.accountId)
+      if (localStorage.accountSearch !== '') {
+        this.viewCertificates(localStorage.accountSearch)
+      } else {
+        this.viewCertificates(localStorage.accountId)
+      }
     },
     methods: {
       verNearHispano () {
         this.$router.push('https://educacion.nearhispano.org/')
       },
       async viewCertificates (accountId) {
+        //alert(accountId)
         // connect to NEAR
         const near = await connect(
           CONFIG(new keyStores.BrowserLocalStorageKeyStore())
@@ -110,11 +116,10 @@ import * as nearAPI from 'near-api-js'
         });
         await contract.get_certificate_list({
           account_id: accountId,
-          // account_id: 'hrpalencia.testnet'
         }).then((response) => {
-          //console.log(response);
           this.dataCertificates = response
           console.log(this.dataCertificates);
+          localStorage.accountSearch = ''
         }).catch((err) => {
           console.log(err)
         });

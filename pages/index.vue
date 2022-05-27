@@ -98,7 +98,7 @@
   import * as nearAPI from 'near-api-js'
   import { CONFIG } from '~/services/api'
   const { connect, keyStores, WalletConnection, Contract } = nearAPI
-  const CONTRACT_NAME = "nft.nearcertificate.testnet";
+  const CONTRACT_NAME = "certificate.nearcertificate.testnet";
   export default {
     name: 'DashboardDashboard',
     data () {

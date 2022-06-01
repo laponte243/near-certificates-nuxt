@@ -1,7 +1,17 @@
 <template>
   <div class="container">
-    <aside class="text-lg-h2 text-h4 font-weight-bold text-center mt-8">
-      Mis Certificados
+    <aside class="text-lg-h3 text-h4 font-weight-bold text-center mt-8">
+      {{ title }}
+    </aside>
+    <aside v-if="busqueda" class="text-right">
+      <v-btn
+        class="ma-2"
+        rounded
+        outlined
+        @click="reload()"
+      >
+        Regresar
+      </v-btn>
     </aside>
     <v-row class="mt-5">
       <v-col
@@ -107,16 +117,18 @@
         busqueda: false,
         snackbar: false,
         textSnack: 'Cargando',
+        title: '',
       }
     },
     mounted() {
-      if (localStorage.accountSearch !== '') {
+      if (localStorage.accountSearch !== localStorage.accountId && localStorage.accountSearch !== '') {
         console.log(localStorage.accountSearch)
         this.busqueda = true
         this.viewCertificates(localStorage.accountSearch)
       } else {
         console.log(localStorage.accountId)
         this.busqueda = false
+        this.title = 'Mis Certificados'
         this.viewCertificates(localStorage.accountId)
       }
     },
@@ -144,7 +156,10 @@
           this.dataCertificates = response
           this.snackbar = false
           console.log(this.dataCertificates);
-          localStorage.accountSearch = ''
+          if (this.busqueda) {
+            this.title = 'Certificados de ' + this.dataCertificates[0].nombre
+            localStorage.accountSearch = ''
+          } 
         }).catch((err) => {
           console.log(err)
           this.snackbar = false
@@ -191,7 +206,10 @@
         }).catch(error => {
           console.log(error)
         })
-      }
+      },
+      reload () {
+        this.$router.go(0)
+      },
     }
   }
 </script>

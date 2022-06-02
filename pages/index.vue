@@ -20,7 +20,7 @@
         class="col-lg-3 col-md-4 col-sm-6 col-12"
       >
         <viewer>
-          <v-card class="mx-auto">
+          <v-card class="mx-auto" @click="viewImg(item.img)">
             <v-img
               class="white--text align-end"
               height="200px"
@@ -77,6 +77,32 @@
     >
       Open Snackbar
     </v-btn> -->
+    <v-dialog
+      v-model="dialog"
+      transition="dialog-top-transition"
+      max-width="600"
+    >
+      <!-- <template v-slot:activator="{ on, attrs }">
+        <v-btn
+          color="primary"
+          v-bind="attrs"
+          v-on="on"
+        >From the top</v-btn>
+      </template> -->
+      <template v-slot:default="dialog">
+        <v-card>
+          <v-card-text>
+            <v-img :src="imgSelect" />
+          </v-card-text>
+          <v-card-actions class="justify-end">
+            <v-btn
+              text
+              @click="dialog.value = false"
+            >Close</v-btn>
+          </v-card-actions>
+        </v-card>
+      </template>
+    </v-dialog>
     <v-snackbar
       v-model="snackbar"
       :timeout="-1"
@@ -118,15 +144,15 @@
         snackbar: false,
         textSnack: 'Cargando',
         title: '',
+        imgSelect: '',
+        dialog: false,
       }
     },
     mounted() {
       if (localStorage.accountSearch !== localStorage.accountId && localStorage.accountSearch !== '') {
-        console.log(localStorage.accountSearch)
         this.busqueda = true
         this.viewCertificates(localStorage.accountSearch)
       } else {
-        console.log(localStorage.accountId)
         this.busqueda = false
         this.title = 'Mis Certificados'
         this.viewCertificates(localStorage.accountId)
@@ -155,7 +181,7 @@
         }).then((response) => {
           this.dataCertificates = response
           this.snackbar = false
-          console.log(this.dataCertificates);
+          // console.log(this.dataCertificates);
           if (this.busqueda) {
             this.title = 'Certificados de ' + this.dataCertificates[0].nombre
             localStorage.accountSearch = ''
@@ -209,6 +235,10 @@
       },
       reload () {
         this.$router.go(0)
+      },
+      viewImg (img) {
+        this.imgSelect = img
+        this.dialog = true
       },
     }
   }

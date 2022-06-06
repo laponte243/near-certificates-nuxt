@@ -234,6 +234,7 @@
         })
       },
       reload () {
+        localStorage.accountSearch = ''
         this.$router.go(0)
       },
       viewImg (img) {
